@@ -1,16 +1,33 @@
-# React + Vite
+# Code Orbit Studios Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A premium, interactive, 3D/video-background portfolio for Code Orbit Studios, built with React, Vite, Tailwind CSS, and Framer Motion.
 
-Currently, two official plugins are available:
+## Features
+- **Video Hero Section**: High-quality video background with lip-sync capabilities.
+- **Glassmorphism & Neon UI**: Premium red and black aesthetic with glassmorphism components.
+- **Interactive Animations**: Advanced scrolling animations using Framer Motion and AOS.
+- **Custom ID Card**: Unique ID badge UI representing the studio access card.
+- **Fully Responsive**: Mobile-first design that scales perfectly across devices.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech Stack
+- React 18
+- Vite
+- Tailwind CSS
+- Framer Motion
+- AOS (Animate On Scroll)
+- Lucide React
 
-## React Compiler
+## Development
+```bash
+# Install dependencies
+npm install
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+# Start the dev server
+npm run dev
 
-## Expanding the ESLint configuration
+# Build for production
+npm run build
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## License
+&copy; 2025 Code Orbit Studios. All rights reserved.
