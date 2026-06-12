@@ -4,19 +4,19 @@ import 'aos/dist/aos.css';
 
 const testimonials = [
   {
-    quote: "Code Orbit Studios transformed our vision into reality. The custom AI pipeline they built saved us hundreds of hours.",
-    author: "Sarah J.",
-    role: "Operations Director"
+    quote: "Code Orbit Studios completely transformed our studio's workflow. The interactive portfolio looks stunning, and the automated WhatsApp client engagement has been a massive game-changer for our business.",
+    author: "Ganesh",
+    role: "Owner, Sushma Digitals"
   },
   {
-    quote: "Exceptional full-stack expertise. They delivered our web app ahead of schedule and the UX is flawless.",
-    author: "Mark T.",
-    role: "Founder"
+    quote: "They built our entire organic mushroom eCommerce platform from scratch. The website is incredibly fast, looks fantastic, and the entire shopping experience is flawlessly engineered.",
+    author: "Akhil",
+    role: "Founder, Exsola Sciences"
   },
   {
-    quote: "Highly recommend for anyone needing complex automation. Reliable, fast, and incredibly smart.",
-    author: "Elena R.",
-    role: "CTO"
+    quote: "We needed a platform with complex product customization options and nationwide delivery tracking. They delivered a perfect, highly-polished solution that our customers absolutely love.",
+    author: "Nikhil",
+    role: "CEO, ToujoursNot"
   }
 ];
 

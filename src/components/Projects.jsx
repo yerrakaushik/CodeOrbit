@@ -3,28 +3,28 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 
 const projects = [
   {
-    category: 'AI Forensics',
-    title: 'ForenSIGHT',
+    category: 'Full-Stack Web App',
+    title: 'Sushma Digitals',
     number: '01',
     link: '#',
-    desc: 'Autonomous AI forensics platform for digital evidence analysis, pattern detection, and automated investigation reporting. Powered by state-of-the-art LLMs to drastically reduce manual review times while maintaining chain-of-custody integrity.',
-    tags: ['Python', 'LangChain', 'FastAPI', 'React']
+    desc: 'A comprehensive, full-stack web application built for a photography and videography studio. It serves as an interactive portfolio for wedding films and albums, combined with a custom business admin backend that automates client engagement, such as sending WhatsApp wishes for birthdays and anniversaries.',
+    tags: ['Next.js', 'Node.js', 'WhatsApp API', 'PostgreSQL']
   },
   {
-    category: 'GenAI · Multi-Agent',
-    title: 'AI Research Assistant',
+    category: 'eCommerce Platform',
+    title: 'Exsola Sciences',
     number: '02',
     link: '#',
-    desc: 'Multi-agent research platform utilizing advanced RAG pipelines. It completely automates the literature review process, source validation, and end-to-end report generation with high accuracy and citation tracking.',
-    tags: ['RAG', 'LlamaIndex', 'Next.js', 'Supabase']
+    desc: 'Built the complete eCommerce shopping market for an organic mushroom startup. The platform features a seamless shopping experience, robust inventory management, and a highly optimized, fast checkout flow designed to drive organic sales.',
+    tags: ['React', 'Tailwind CSS', 'Stripe', 'Express']
   },
   {
-    category: 'Web + AI Automation',
-    title: 'Sushma Digitals Studio',
+    category: 'Custom eCommerce',
+    title: 'ToujoursNot',
     number: '03',
     link: '#',
-    desc: 'A full-stack modern photography studio website embedded with WhatsApp automation, proactive lead nurturing via n8n workflows, and a Gemini-powered conversational agent for real-time client engagement.',
-    tags: ['Next.js', 'Flask', 'n8n', 'Supabase']
+    desc: 'A tailored eCommerce platform specializing in custom keychains, bouquets, and bags. It includes advanced product customization interfaces for users and an integrated nationwide delivery tracking system serving customers all over India.',
+    tags: ['Next.js', 'PostgreSQL', 'Framer Motion', 'Tailwind']
   }
 ];
 
