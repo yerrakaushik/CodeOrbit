@@ -5,19 +5,13 @@ const Footer = () => {
     <footer className="bg-[#111111] text-[#d4d4d4] py-16 px-6 md:px-12 w-full font-mono text-[10px] md:text-xs tracking-widest flex flex-col justify-between min-h-[50vh]">
       
       {/* Top Row */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 w-full font-medium">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 w-full font-medium border-b border-white/5 pb-10">
         <div className="flex flex-col gap-1">
-          <p>AI Engineer & Full Stack Developer</p>
+          <p className="text-[#ff2a2a] font-bold">Code Orbit Studios</p>
+          <p className="text-white/50">AI Engineering & Full-Stack Development</p>
         </div>
-        
-        <div className="flex flex-col gap-1 md:items-center">
-          <p>5+ years of experience</p>
-          <a href="#work" className="underline hover:text-white transition-colors mt-1 underline-offset-4 decoration-1">View Work</a>
-        </div>
-        
-        <div className="flex flex-col gap-1 md:items-end">
-          <p>Hyderabad, India</p>
-          <p>{new Date().getFullYear()}</p>
+        <div className="text-white/30 md:text-right">
+          Available for freelance opportunities
         </div>
       </div>
 

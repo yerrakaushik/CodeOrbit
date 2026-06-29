@@ -21,11 +21,11 @@ const Navbar = () => {
 
   return (
     <nav 
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
         isOpen 
           ? 'bg-[#ff2a2a] py-4'
           : isScrolled 
-            ? 'bg-transparent py-4' 
+            ? 'bg-black/75 backdrop-blur-md border-b border-white/10 py-4 shadow-lg shadow-black/20' 
             : 'bg-transparent py-6'
       }`}
     >
@@ -33,8 +33,23 @@ const Navbar = () => {
         
         {/* Left Side: Logo/Name */}
         <div className="flex items-center">
-          <a href="#" className="text-xl md:text-2xl font-bold font-sans tracking-tighter">
-            Code Orbit Studios<span className="text-red-500">.</span>
+          <a href="#" className="flex items-center gap-3 group text-white text-xl md:text-2xl font-bold tracking-tighter">
+            <svg className="w-8 h-8 text-[#ff2a2a] transition-transform duration-700 group-hover:rotate-180" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/* Outer Orbit Path */}
+              <circle cx="50" cy="50" r="38" stroke="currentColor" strokeWidth="4" strokeDasharray="8 6" className="opacity-70" />
+              {/* Inner Orbit Path */}
+              <circle cx="50" cy="50" r="28" stroke="white" strokeWidth="2" strokeDasharray="15 35" className="opacity-40 animate-pulse" />
+              {/* Central Code Brackets */}
+              <path d="M42 35L32 50L42 65" stroke="white" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M58 35L68 50L58 65" stroke="white" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M53 32L47 68" stroke="#ff2a2a" strokeWidth="5" strokeLinecap="round" />
+              {/* Orbital nodes */}
+              <circle cx="50" cy="12" r="5" fill="#ff2a2a" />
+              <circle cx="12" cy="50" r="3" fill="white" />
+            </svg>
+            <span className="tracking-tight uppercase font-black text-lg md:text-xl">
+              Code Orbit<span className="text-[#ff2a2a]">.</span>
+            </span>
           </a>
         </div>
 

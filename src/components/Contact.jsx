@@ -19,14 +19,14 @@ const Contact = () => {
   };
 
   return (
-    <section ref={ref} id="contact" className="bg-[#080808] w-full min-h-screen relative overflow-hidden flex items-center justify-center pt-32 pb-24 border-t border-white/5">
+    <section ref={ref} id="contact" className="bg-[#ff2a2a] w-full min-h-screen relative overflow-hidden flex items-center justify-center pt-32 pb-28 rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-12 md:-mt-14 z-20">
       {/* Huge Background Text */}
       <motion.div 
         style={{ y }}
-        className="absolute top-0 left-0 w-full h-full flex flex-col justify-start items-center overflow-hidden pointer-events-none z-0 pt-20 md:pt-12 opacity-50"
+        className="absolute top-0 left-0 w-full h-full flex flex-col justify-start items-center overflow-hidden pointer-events-none z-0 pt-20 md:pt-12 opacity-15"
       >
         <h1 
-          className="text-[20vw] leading-[0.75] font-black text-[#111] uppercase tracking-tighter select-none scale-y-[1.6] origin-top"
+          className="text-[20vw] leading-[0.75] font-black text-black uppercase tracking-tighter select-none scale-y-[1.6] origin-top"
           style={{ fontFamily: "'Impact', 'Arial Black', sans-serif" }}
         >
           Contact
@@ -127,6 +127,13 @@ const Contact = () => {
           )}
 
         </div>
+      </div>
+
+      {/* Torn paper divider at bottom of Contact to transition into Footer */}
+      <div className="absolute bottom-0 left-0 w-full pointer-events-none z-30 transform translate-y-1">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-12 md:h-20 fill-[#111111]">
+          <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,119.62,189.5,99.8,242.79,81.82,282.88,63.6,321.39,56.44Z"></path>
+        </svg>
       </div>
     </section>
   );

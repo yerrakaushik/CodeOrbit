@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useRef, useState } from 'react';
+import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 
 const projects = [
   {
@@ -34,11 +34,24 @@ const Card = ({ project, i, progress, range, targetScale }) => {
   // The card scales down smoothly as you scroll further down
   const scale = useTransform(progress, range, [1, targetScale]);
   
+  const [isStacked, setIsStacked] = useState(false);
+  useMotionValueEvent(scale, "change", (latest) => {
+    if (latest < 0.99) {
+      setIsStacked(true);
+    } else {
+      setIsStacked(false);
+    }
+  });
+  
   return (
     <div ref={containerRef} className="h-[85vh] flex items-center justify-center sticky top-24 md:top-32">
       <motion.div 
         style={{ scale, top: `calc(${i * 28}px)` }}
-        className="relative bg-[#111] border border-white/10 rounded-[40px] sm:rounded-[50px] md:rounded-[60px] p-8 sm:p-10 md:p-14 w-full max-w-5xl mx-auto flex flex-col gap-10 md:gap-14 shadow-[0_0_50px_rgba(255,42,42,0.05)] origin-top hover:border-[#ff2a2a]/30 transition-colors duration-500"
+        className={`relative bg-[#111] border rounded-[40px] sm:rounded-[50px] md:rounded-[60px] p-8 sm:p-10 md:p-14 w-full max-w-5xl mx-auto flex flex-col gap-10 md:gap-14 origin-top hover:border-[#ff2a2a]/30 transition-all duration-500 ${
+          isStacked 
+            ? 'border-white shadow-[0_0_55px_rgba(255,255,255,0.18)] z-0' 
+            : 'border-white/10 shadow-[0_0_50px_rgba(255,42,42,0.05)] z-10'
+        }`}
       >
         {/* Top row */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 w-full">

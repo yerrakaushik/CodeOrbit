@@ -9,7 +9,6 @@ const Hero = () => {
   const hasPlayedIntro = useRef(false);
   const isInView = useRef(false);
   const [isMuted, setIsMuted] = useState(true);
-  const [showSoundBadge, setShowSoundBadge] = useState(false);
 
   useEffect(() => {
     AOS.init({
@@ -19,28 +18,37 @@ const Hero = () => {
     });
   }, []);
 
+  // Intersection observer to play/pause video when scrolling in/out of view
   useEffect(() => {
-    // Show sound badge after 2s
-    const badgeTimer = setTimeout(() => {
-      setShowSoundBadge(true);
-    }, 2000);
-    // Hide sound badge after 7s
-    const hideTimer = setTimeout(() => {
-      setShowSoundBadge(false);
-    }, 7000);
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           isInView.current = true;
-          if (!hasPlayedIntro.current) {
-            if (videoRef.current) {
+          if (videoRef.current) {
+            if (!hasPlayedIntro.current) {
               videoRef.current.currentTime = 0;
+              hasPlayedIntro.current = true;
+            }
+            
+            // Try playing unmuted first
+            if (isMuted) {
+              videoRef.current.muted = false;
+              videoRef.current.play()
+                .then(() => {
+                  setIsMuted(false);
+                })
+                .catch(() => {
+                  // Fallback to muted if blocked
+                  if (videoRef.current) {
+                    videoRef.current.muted = true;
+                    videoRef.current.play().catch(() => {});
+                  }
+                  setIsMuted(true);
+                });
+            } else {
+              videoRef.current.muted = false;
               videoRef.current.play().catch(() => {});
             }
-            hasPlayedIntro.current = true;
-          } else {
-            if (videoRef.current) videoRef.current.play().catch(() => {});
           }
         } else {
           isInView.current = false;
@@ -53,29 +61,42 @@ const Hero = () => {
     if (heroRef.current) observer.observe(heroRef.current);
     return () => {
       observer.disconnect();
-      clearTimeout(badgeTimer);
-      clearTimeout(hideTimer);
     };
   }, [isMuted]);
 
-  const handleUnmute = () => {
-    setIsMuted(false);
-    setShowSoundBadge(false);
-    if (videoRef.current) {
-      videoRef.current.muted = false;
-    }
-  };
+  // Unmute automatically on the first user interaction on the page
+  useEffect(() => {
+    const handleFirstInteraction = () => {
+      if (videoRef.current && videoRef.current.muted) {
+        videoRef.current.muted = false;
+        videoRef.current.play().catch(() => {});
+        setIsMuted(false);
+      }
+      // Remove event listeners after first trigger
+      window.removeEventListener('click', handleFirstInteraction);
+      window.removeEventListener('touchstart', handleFirstInteraction);
+    };
+
+    window.addEventListener('click', handleFirstInteraction);
+    window.addEventListener('touchstart', handleFirstInteraction);
+
+    return () => {
+      window.removeEventListener('click', handleFirstInteraction);
+      window.removeEventListener('touchstart', handleFirstInteraction);
+    };
+  }, []);
 
   return (
     <section id="home" ref={heroRef} className="relative w-full h-screen overflow-hidden bg-black">
-      {/* Background Video */}
+      {/* Background Video (Scaled to crop watermark) */}
       <video
         ref={videoRef}
         loop
         muted
         playsInline
+        autoPlay
         onContextMenu={e => e.preventDefault()}
-        style={{ pointerEvents: 'none' }}
+        style={{ pointerEvents: 'none', transform: 'scale(1.12)', transformOrigin: 'center' }}
         className="absolute top-0 left-0 w-full h-full object-cover z-0"
       >
         <source src={heroVideo} type="video/mp4" />
@@ -126,18 +147,6 @@ const Hero = () => {
         </div>
 
       </div>
-
-      {showSoundBadge && (
-        <button
-          onClick={handleUnmute}
-          className="absolute bottom-8 right-8 z-50 flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-md bg-black/30 border border-white/30 text-white text-xs font-bold uppercase tracking-widest hover:bg-black/50 transition-all animate-pulse"
-        >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M11 5L6 9H2v6h4l5 4V5z"></path>
-          </svg>
-          TAP FOR SOUND
-        </button>
-      )}
 
       {/* Scroll Indicator */}
       <div 
