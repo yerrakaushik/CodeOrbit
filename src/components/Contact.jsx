@@ -12,10 +12,40 @@ const Contact = () => {
   // Parallax translation for the big text
   const y = useTransform(scrollYProgress, [0, 1], ["-20%", "30%"]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    localStorage.setItem('contactSubmitted', 'true');
+    
+    // To receive actual emails, generate a free key at https://web3forms.com/
+    // and paste it below:
+    const web3formsAccessKey = "YOUR_WEB3FORMS_ACCESS_KEY"; 
+    
+    if (!web3formsAccessKey || web3formsAccessKey === "YOUR_WEB3FORMS_ACCESS_KEY") {
+      alert("Form submission is simulated. To receive actual emails, please generate a free access key on Web3Forms (https://web3forms.com/) and paste it in src/components/Contact.jsx!");
+      setIsSubmitted(true);
+      localStorage.setItem('contactSubmitted', 'true');
+      return;
+    }
+
+    const formData = new FormData(e.target);
+    formData.append("access_key", web3formsAccessKey);
+    formData.append("subject", "New Lead from Code Orbit Portfolio");
+    formData.append("from_name", "Code Orbit Studio Website");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+      const data = await response.json();
+      if (data.success) {
+        setIsSubmitted(true);
+        localStorage.setItem('contactSubmitted', 'true');
+      } else {
+        alert("Oops! Something went wrong: " + (data.message || "Please try again later."));
+      }
+    } catch (error) {
+      alert("Network error: Could not send message. Please check your connection.");
+    }
   };
 
   return (
@@ -63,6 +93,7 @@ const Contact = () => {
                   <input 
                     type="text" 
                     id="firstName" 
+                    name="firstName"
                     required
                     className="w-full bg-black/50 border border-white/10 rounded-full px-6 py-4 text-white focus:outline-none focus:border-[#ff2a2a] transition-colors placeholder-gray-600 font-medium"
                     placeholder="John"
@@ -73,6 +104,7 @@ const Contact = () => {
                   <input 
                     type="text" 
                     id="lastName" 
+                    name="lastName"
                     required
                     className="w-full bg-black/50 border border-white/10 rounded-full px-6 py-4 text-white focus:outline-none focus:border-[#ff2a2a] transition-colors placeholder-gray-600 font-medium"
                     placeholder="Doe"
@@ -85,6 +117,7 @@ const Contact = () => {
                 <input 
                   type="email" 
                   id="email" 
+                  name="email"
                   required
                   className="w-full bg-black/50 border border-white/10 rounded-full px-6 py-4 text-white focus:outline-none focus:border-[#ff2a2a] transition-colors placeholder-gray-600 font-medium"
                   placeholder="john@example.com"
@@ -95,6 +128,7 @@ const Contact = () => {
                 <label htmlFor="message" className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-4">Message</label>
                 <textarea 
                   id="message" 
+                  name="message"
                   required
                   placeholder="Tell us about your project..." 
                   className="w-full min-h-[160px] bg-black/50 border border-white/10 rounded-[30px] px-6 py-5 text-white focus:outline-none focus:border-[#ff2a2a] transition-colors placeholder-gray-600 font-medium resize-none"
